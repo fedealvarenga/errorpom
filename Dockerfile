@@ -6,7 +6,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY ./src ./src
 RUN mvn --batch-mode -DskipTests package
-FROM eclipse-temurin:17-jdk-alpine
+FROM maven:3.8.5-openjdk-17
 WORKDIR /app
 COPY --from=stage1 /app/target/*.jar ./app.jar
 EXPOSE 80

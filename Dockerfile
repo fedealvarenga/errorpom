@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY ./src ./src
-RUN mvn clean install -Dmaven.test.skip=true
+RUN mvn --batch-mode -DskipTests package
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=stage1 /app/target/*.jar ./app.jar

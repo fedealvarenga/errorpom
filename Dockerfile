@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY ./src ./src
-RUN mvn --batch-mode -DskipTests package
+RUN mvn clean install -Dmaven.test.skip=true
 FROM openjdk:17-alpine
 WORKDIR /app
 COPY --from=stage1 /app/target/*.jar ./app.jar
